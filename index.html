@@ -2112,15 +2112,7 @@
         var dados = coletarDados();
         trackEvent('whatsapp_click', dados);
 
-        var msg = [
-          '*Validação Executiva — Sacoman & Cabral*',
-          'Nome: ' + (dados.nome || 'Não informado'),
-          'Cargo: ' + (dados.cargo || 'Não informado'),
-          'Empresa: ' + (dados.empresa || 'Não informado'),
-          'Colaboradores: ' + (dados.porte || 'Não informado'),
-          'E-mail: ' + (dados.email || 'Não informado'),
-          'Contexto: ' + (dados.contexto || 'Interesse na validação de cenário')
-        ].join('\n');
+        var msg = 'Olá, quero diagnosticar as perdas da minha empresa.';
 
         if (CONFIG.WHATSAPP_NUMERO) {
           var url = 'https://wa.me/' + CONFIG.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
