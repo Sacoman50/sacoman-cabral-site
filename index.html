@@ -10,7 +10,6 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230E141A'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-style='italic' font-size='44' fill='%23C24034' text-anchor='middle'%3E%26amp;%3C/text%3E%3C/svg%3E">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1122,13 +1121,6 @@
     .leitura-barra { transition: none; }
     .btn:hover { transform: none; }
   }
-  .campo-label { display:block; font-size:14px; margin:8px 0 5px; }
-  .aviso-form, .sim-disclaimer { font-size:14px; line-height:1.6; }
-  .aviso-form a, #privacidade a { text-decoration:underline; overflow-wrap:anywhere; }
-  #privacidade p { margin-top:16px; line-height:1.7; }
-  #res-captura { font-size:clamp(16px,2vw,22px); line-height:1.5; }
-  .sim-grupo input[type=number] { margin:6px 0 12px; }
-  button:disabled { opacity:.55; cursor:not-allowed; }
 </style>
 </head>
 <body>
@@ -1277,9 +1269,9 @@
 <section class="sec escuro" id="simulador">
   <div class="wrap">
     <div class="cab rev">
-      <span class="rot rot-carmim">Mapeamento de Custos</span>
-      <h2>Quanto esses custos representam na sua operação?</h2>
-      <p class="apoio">Informe os custos de um mesmo período de 12 meses. O cálculo ocorre apenas no seu navegador.</p>
+      <span class="rot rot-carmim">Estimativa Preliminar</span>
+      <h2>Quanto pode estar escapando da sua operação?</h2>
+      <p class="apoio">Faça uma estimativa preliminar em menos de 1 minuto.</p>
     </div>
 
     <div class="simulador-card rev d1">
@@ -1306,59 +1298,53 @@
           <div class="sim-grupo">
             <label for="select-dor">Principal Desafio</label>
             <select id="select-dor">
-              <option value="reajuste">Reajuste do Plano de Saúde</option>
+              <option value="reajuste">Reajuste do Plano de Saúde (&gt;20%)</option>
               <option value="fap">FAP/NTEP &amp; Nexos Previdenciários</option>
               <option value="absenteismo">Absenteísmo &amp; Horas Extras</option>
               <option value="todos">Múltiplos Fatores Simultâneos</option>
             </select>
           </div>
-          <div class="sim-grupo" style="margin-top:16px">
-            <label for="custo-saude">Plano de saúde — custo anual da empresa (R$)</label>
-            <input id="custo-saude" type="number" min="0" max="1000000000000" step="0.01" inputmode="decimal" placeholder="Ex.: 1200000" aria-describedby="sim-premissas">
-            <label for="custo-fap">Contribuição RAT ajustada pelo FAP — anual (R$)</label>
-            <input id="custo-fap" type="number" min="0" max="1000000000000" step="0.01" inputmode="decimal" placeholder="Ex.: 180000" aria-describedby="sim-premissas">
-            <label for="custo-he">Horas extras, com encargos — anual (R$)</label>
-            <input id="custo-he" type="number" min="0" max="1000000000000" step="0.01" inputmode="decimal" placeholder="Ex.: 240000" aria-describedby="sim-premissas">
-          </div>
         </div>
 
-        <div class="sim-resultados" aria-live="polite" aria-atomic="true">
-          <span class="rot" style="color:var(--aco); margin-bottom:8px; display:block;">Custos anuais informados</span>
+        <div class="sim-resultados">
+          <span class="rot" style="color:var(--aco); margin-bottom:8px; display:block;">Estimativa Preliminar de Exposição</span>
 
           <div class="sim-metricas-grid">
             <div class="sim-metrica-row">
-              <span>Plano de saúde / ano:</span>
-              <span class="valor" id="res-saude">—</span>
+              <span>Saúde (Sinistralidade):</span>
+              <span class="valor" id="res-saude">R$ 1.552.500</span>
             </div>
             <div class="sim-metrica-row">
-              <span>RAT ajustado pelo FAP / ano:</span>
-              <span class="valor" id="res-fap">—</span>
+              <span>Previdenciário (FAP):</span>
+              <span class="valor" id="res-fap">R$ 775.000</span>
             </div>
             <div class="sim-metrica-row">
-              <span>Horas extras / ano:</span>
-              <span class="valor" id="res-he">—</span>
+              <span>Horas Extras:</span>
+              <span class="valor" id="res-he">R$ 600.000</span>
             </div>
             <div class="sim-metrica-row total-row">
-              <span>Total anual informado:</span>
-              <span class="valor" id="res-total-drenos">—</span>
+              <span>Exposição Total:</span>
+              <span class="valor" id="res-total-drenos">R$ 2.927.500</span>
             </div>
           </div>
 
           <div class="sim-total-bloco">
-            <span class="sim-total-rot">Leitura do cenário</span>
-            <div class="sim-total-val" id="res-captura">Informe ao menos um custo anual.</div>
+            <span class="sim-total-rot">Potencial Indicativo de Captura</span>
+            <div class="sim-total-val" id="res-captura">R$ 936.800 a R$ 1.902.875</div>
           </div>
 
           <div style="margin-top: 12px;">
             <button type="button" class="btn btn-carmim" id="btn-aplicar-sim" style="width: 100%;">
-              Solicitar análise deste cenário
+              Validar esta estimativa
             </button>
             <p style="font-size: 10.5px; color: var(--aco); text-align: center; margin: 6px 0 0;">
-              A identificação de perdas exige análise dos dados e das causas de cada custo.
+              Transformamos a estimativa em um diagnóstico baseado nos dados reais da operação.
             </p>
           </div>
 
-          <p class="sim-disclaimer" id="sim-premissas">Método: soma dos custos anuais preenchidos, em reais, sem multiplicadores setoriais. Campos vazios são excluídos e tornam o total parcial; zero indica ausência de custo. Use o mesmo período de 12 meses e não repita despesas entre categorias. Colaboradores, segmento e desafio contextualizam o atendimento, mas não alteram a soma. Custos não equivalem a desperdício, perda recuperável ou impacto no EBITDA. Não há promessa de economia.</p>
+          <p class="sim-disclaimer">
+            * Cenário anual preliminar calculado a partir do segmento, número de colaboradores e desafio selecionado. Os valores são referenciais, não representam diagnóstico, economia garantida ou impacto confirmado no EBITDA. A exposição e a captura efetivas dependem da análise dos dados reais da empresa.
+          </p>
         </div>
 
       </div>
@@ -1568,7 +1554,7 @@
       <div class="faq-item">
         <button class="faq-pergunta" aria-expanded="false">Como os dados são tratados?</button>
         <div class="faq-resposta">
-          <div class="faq-resposta-int">Este formulário é destinado apenas ao contato comercial. O tratamento de dados de clientes, especialmente dados de saúde, exige definição prévia de finalidade, responsabilidades, acesso e retenção em instrumento próprio. Consulte o aviso de privacidade do site.</div>
+          <div class="faq-resposta-int">O tratamento é definido conforme a finalidade de cada projeto, com minimização, controle de acesso, responsabilidades e prazos de retenção formalizados antes da análise.</div>
         </div>
       </div>
 
@@ -1610,49 +1596,45 @@
         <input type="hidden" name="assunto" id="assunto-emailjs" value="Nova validação de cenário — Sacoman & Cabral">
         <div class="dupla">
           <div>
-            <label class="campo-label" for="nome">Nome *</label>
             <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Nome Completo *" maxlength="150" required>
           </div>
           <div>
-            <label class="campo-label" for="cargo">Cargo / função (opcional)</label>
-            <input id="cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Cargo / Função" maxlength="120">
+            <input id="cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Cargo / Função (opcional)" maxlength="120">
           </div>
         </div>
 
         <div class="dupla">
           <div>
-            <label class="campo-label" for="empresa">Empresa *</label>
             <input id="empresa" name="empresa" type="text" autocomplete="organization" placeholder="Empresa *" maxlength="180" required>
           </div>
           <div>
-            <label class="campo-label" for="email">E-mail para retorno *</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="nome@empresa.com.br" maxlength="254" required>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="E-mail para retorno *" maxlength="254" required>
           </div>
         </div>
 
         <div class="dupla">
           <div>
-            <label class="campo-label" for="porte">Quantidade de colaboradores (opcional)</label>
             <select id="porte" name="porte">
               <option value="">Colaboradores (Aproximado)</option>
-              <option value="Menos de 500 colaboradores">Menos de 500 colaboradores</option>
-              <option value="500 a 1.000 colaboradores">500 a 1.000 colaboradores</option>
-              <option value="1.000 a 3.000 colaboradores">1.000 a 3.000 colaboradores</option>
-              <option value="Mais de 3.000 colaboradores">Mais de 3.000 colaboradores</option>
+              <option value="Menos de 500 vidas">Menos de 500 vidas</option>
+              <option value="500 a 1.000 vidas">500 a 1.000 vidas</option>
+              <option value="1.000 a 3.000 vidas">1.000 a 3.000 vidas</option>
+              <option value="Mais de 3.000 vidas">Mais de 3.000 vidas</option>
             </select>
           </div>
           <div>
-            <label class="campo-label" for="telefone">Telefone / WhatsApp (opcional)</label>
-            <input id="telefone" name="telefone" type="tel" autocomplete="tel" maxlength="30" placeholder="Telefone / WhatsApp">
+            <input id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="Telefone / WhatsApp" maxlength="30">
           </div>
         </div>
 
         <div>
-          <label class="campo-label" for="contexto">Contexto ou desafio (opcional)</label>
-            <textarea maxlength="2000" aria-describedby="aviso-form" id="contexto" name="contexto" placeholder="Contexto ou principal desafio (opcional)"></textarea>
+          <textarea id="contexto" name="contexto" placeholder="Contexto ou principal desafio (opcional)" maxlength="2000"></textarea>
         </div>
 
-        <p id="aviso-form" class="aviso-form">Usaremos seus dados para responder a esta solicitação. Não envie dados de saúde, CPF ou informações pessoais de terceiros. Leia o <a href="#privacidade">aviso de privacidade</a> antes de enviar. O WhatsApp abre um serviço externo.</p>
+        <p class="sim-disclaimer" id="aviso-form">
+          Usaremos os dados informados apenas para responder a esta solicitação. Não envie dados de saúde, CPF ou informações pessoais de colaboradores e terceiros. Consulte o <a href="#privacidade">aviso de privacidade</a>.
+        </p>
+
         <div class="botoes-form">
           <button class="btn btn-carmim" type="submit" id="btn-submit-form">
             Validar meu cenário
@@ -1694,16 +1676,19 @@
 </div>
 
 <!-- Rodapé Institucional Enxuto -->
-<section class="sec" id="privacidade"><div class="wrap" style="max-width:840px">
-<h2>Aviso de privacidade</h2>
-<p><strong>Responsável pelo contato:</strong> Sacoman &amp; Cabral. Para dúvidas sobre o tratamento e exercício de direitos, escreva para <a href="mailto:matheussacoman@arquitetodeprocessos.com.br">matheussacoman@arquitetodeprocessos.com.br</a>.</p>
-<p><strong>Dados e finalidade.</strong> O formulário solicita nome, empresa e e-mail para responder ao seu pedido e conduzir tratativas de contratação a seu pedido (art. 7º, V, da LGPD). Cargo, quantidade de colaboradores, telefone e contexto são opcionais. Este formulário não inscreve você em campanhas de marketing. Não envie dados de saúde, nomes de pacientes, CPF ou informações pessoais de colaboradores e terceiros.</p>
-<p><strong>Simulador.</strong> Os valores financeiros são calculados localmente, sem armazenamento persistente ou envio automático. O botão de contato pode preencher segmento, quantidade de colaboradores e desafio no campo de contexto, que pode ser revisado antes do envio; os valores financeiros não são transferidos.</p>
-<p><strong>Serviços utilizados.</strong> Ao enviar o formulário, os dados são encaminhados pelo EmailJS e pelo serviço de e-mail utilizado no atendimento. Ao clicar no WhatsApp, você acessa um serviço da Meta, sujeito às suas próprias condições de privacidade. Esses fornecedores podem processar dados em outros países. O site carrega fontes do Google Fonts e a biblioteca de envio de um provedor externo; esses serviços podem receber dados técnicos da conexão, como endereço IP e informações do navegador. Consulte também as políticas de <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">EmailJS</a> e <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp</a>.</p>
-<p><strong>Retenção.</strong> Os dados de contato são utilizados durante o atendimento e as tratativas. A conservação posterior deve se limitar às finalidades justificadas e às obrigações legais aplicáveis; a exclusão pode ser solicitada pelo canal acima. Este site não executa a exclusão automática das mensagens recebidas por e-mail ou WhatsApp.</p>
-<p><strong>Seus direitos.</strong> Você pode solicitar confirmação do tratamento, acesso, correção e, quando aplicável, anonimização, bloqueio ou eliminação de dados, além de informações sobre compartilhamento e demais direitos previstos na LGPD. A identidade do solicitante poderá ser verificada para proteger os dados.</p>
-<p><strong>Rastreamento.</strong> Esta página não possui rastreamento analítico ou publicitário ativado. A biblioteca de envio pode utilizar armazenamento local para limitar tentativas. O provedor de hospedagem pode registrar dados técnicos da conexão para operar o serviço.</p>
-</div></section>
+<section class="sec" id="privacidade">
+  <div class="wrap" style="max-width: 840px;">
+    <div class="cab">
+      <span class="rot">Privacidade</span>
+      <h2>Aviso de privacidade</h2>
+    </div>
+    <p><strong>Finalidade.</strong> Nome, empresa e e-mail são usados para responder ao pedido de contato e conduzir tratativas solicitadas pelo visitante. Cargo, número de colaboradores, telefone e contexto são opcionais.</p>
+    <p><strong>Minimização.</strong> Este formulário não deve ser usado para enviar dados de saúde, CPF, nomes de pacientes ou informações pessoais de colaboradores e terceiros.</p>
+    <p><strong>Compartilhamento.</strong> O envio do formulário utiliza o EmailJS e o serviço de e-mail empregado no atendimento. O botão de WhatsApp direciona o visitante a um serviço da Meta, sujeito à política própria desse fornecedor.</p>
+    <p><strong>Retenção e direitos.</strong> Os dados serão mantidos durante o atendimento e pelo período necessário às finalidades e obrigações aplicáveis. Solicitações de acesso, correção ou eliminação, quando cabíveis, podem ser encaminhadas para <a href="mailto:matheussacoman@arquitetodeprocessos.com.br">matheussacoman@arquitetodeprocessos.com.br</a>.</p>
+    <p><strong>Simulador.</strong> As escolhas do simulador são processadas no navegador. Ao solicitar validação, segmento, número de colaboradores e desafio podem ser inseridos no campo de contexto para revisão antes do envio.</p>
+  </div>
+</section>
 
 <footer class="rodape">
   <div class="wrap">
@@ -1766,7 +1751,7 @@
     /* =========================================================================
        TRACKING LEVE (Analytics-Ready)
        ========================================================================= */
-    // Nenhum evento ou dado do visitante é enviado a ferramentas de análise.
+    // A página não envia eventos para ferramentas de análise ou publicidade.
     function trackEvent() {}
 
     var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1871,7 +1856,7 @@
       },
       'modal-seguranca': {
         titulo: 'Segurança e Confidencialidade',
-        html: '<p>O contato comercial deve conter apenas os dados necessários ao atendimento. Não envie dados de saúde ou informações de terceiros pelo formulário.</p><p>Antes de qualquer projeto com dados pessoais, devem ser definidos os responsáveis, a finalidade, a base legal, os acessos, a retenção e os requisitos de segurança aplicáveis. Pseudonimização não equivale a anonimização.</p><p><a href="#privacidade">Leia o aviso de privacidade do site.</a></p>'
+        html: '<p>O formulário é destinado ao contato comercial e não deve receber dados de saúde ou informações pessoais de terceiros.</p><p>Antes de projetos com dados pessoais, são definidos finalidade, responsabilidades, base legal, acessos, segurança e retenção aplicáveis. Consulte o aviso de privacidade desta página.</p>'
       },
       'modal-valor': {
         titulo: 'Como Mensuramos Valor',
@@ -1930,31 +1915,33 @@
     var setorAtivo = 'industria';
 
     function formatarMoeda(val){
-      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      return 'R$ ' + Math.round(val).toLocaleString('pt-BR');
     }
 
     function atualizarSimulador(){
-      var colaboradores = parseInt(rangeColab.value, 10);
-      lblColab.textContent = colaboradores.toLocaleString('pt-BR') + ' colaboradores';
+      var vidas = parseInt(rangeColab.value, 10);
+      lblColab.textContent = vidas.toLocaleString('pt-BR') + (vidas >= 10000 ? '+ colaboradores' : ' colaboradores');
 
-      var ids = ['custo-saude', 'custo-fap', 'custo-he'];
-      var campos = ids.map(function(id){ return document.getElementById(id); });
-      var preenchidos = campos.filter(function(c){ return c.value !== ''; }).length;
-      var invalido = campos.some(function(c){ return c.validity.badInput || (c.value !== '' && (!c.checkValidity() || !Number.isFinite(Number(c.value)))); });
-      var saidas = [resSaude, resFap, resHe];
-      if (invalido) {
-        saidas.forEach(function(el){ el.textContent = '—'; });
-        resTotalDrenos.textContent = '—';
-        resCaptura.textContent = 'Revise os valores: use números não negativos, com até duas casas decimais.';
-        btnAplicarSim.disabled = true;
-        return;
-      }
-      var centavos = campos.map(function(c){ return Math.round(Number(c.value || 0) * 100); });
-      saidas.forEach(function(el, i){ el.textContent = campos[i].value === '' ? 'Não informado' : formatarMoeda(centavos[i] / 100); });
-      var total = centavos.reduce(function(a, b){ return a + b; }, 0) / 100;
-      resTotalDrenos.textContent = preenchidos ? formatarMoeda(total) : '—';
-      resCaptura.textContent = preenchidos === 0 ? 'Informe ao menos um custo anual.' : (preenchidos < 3 ? 'Total parcial: ' + preenchidos + ' de 3 categorias.' : 'Total das 3 categorias informadas.');
-      btnAplicarSim.disabled = preenchidos === 0;
+      var multSaude = 460, multFap = 310, multHe = 240;
+      if (setorAtivo === 'logistica') { multSaude = 490; multFap = 280; multHe = 290; }
+      else if (setorAtivo === 'varejo') { multSaude = 410; multFap = 190; multHe = 210; }
+
+      var dor = selectDor.value;
+      if (dor === 'reajuste') multSaude *= 1.35;
+      else if (dor === 'fap') multFap *= 1.45;
+      else if (dor === 'absenteismo') multHe *= 1.40;
+      else if (dor === 'todos') { multSaude *= 1.20; multFap *= 1.20; multHe *= 1.20; }
+
+      var vSaude = vidas * multSaude;
+      var vFap = vidas * multFap;
+      var vHe = vidas * multHe;
+      var total = vSaude + vFap + vHe;
+
+      resSaude.textContent = formatarMoeda(vSaude);
+      resFap.textContent = formatarMoeda(vFap);
+      resHe.textContent = formatarMoeda(vHe);
+      resTotalDrenos.textContent = formatarMoeda(total);
+      resCaptura.textContent = formatarMoeda(total * 0.32) + ' a ' + formatarMoeda(total * 0.65);
     }
 
     btnSetores.forEach(function(b){
@@ -1968,26 +1955,27 @@
 
     if (rangeColab) rangeColab.addEventListener('input', atualizarSimulador);
     if (selectDor) selectDor.addEventListener('change', atualizarSimulador);
-    ['custo-saude', 'custo-fap', 'custo-he'].forEach(function(id){ document.getElementById(id).addEventListener('input', atualizarSimulador); });
     atualizarSimulador();
 
     if (btnAplicarSim) {
       btnAplicarSim.addEventListener('click', function(){
-        var colaboradores = rangeColab.value;
+        var vidas = rangeColab.value;
         var dorTxt = selectDor.options[selectDor.selectedIndex].text;
         var setorTxt = document.querySelector('.btn-setor.ativo').textContent;
 
         var porteSelect = document.getElementById('porte');
         if (porteSelect) {
-          if (colaboradores < 500) porteSelect.value = 'Menos de 500 colaboradores';
-          else if (colaboradores <= 1000) porteSelect.value = '500 a 1.000 colaboradores';
-          else if (colaboradores <= 3000) porteSelect.value = '1.000 a 3.000 colaboradores';
-          else porteSelect.value = 'Mais de 3.000 colaboradores';
+          if (vidas < 500) porteSelect.value = 'Menos de 500 vidas';
+          else if (vidas <= 1000) porteSelect.value = '500 a 1.000 vidas';
+          else if (vidas <= 3000) porteSelect.value = '1.000 a 3.000 vidas';
+          else porteSelect.value = 'Mais de 3.000 vidas';
         }
 
         var contextoInput = document.getElementById('contexto');
         if (contextoInput) {
-          if (!contextoInput.value.trim()) contextoInput.value = 'Cenário no site: ' + setorTxt + ' com ' + colaboradores + ' colaboradores. Desafio: ' + dorTxt + '. Gostaria de uma análise dos custos.';
+          if (!contextoInput.value.trim()) {
+            contextoInput.value = 'Estimativa anual no site: ' + setorTxt + ' com aproximadamente ' + vidas + ' colaboradores. Desafio: ' + dorTxt + '.';
+          }
         }
 
         var contatoSec = document.getElementById('contato');
@@ -1996,7 +1984,7 @@
           var nomeInput = document.getElementById('nome');
           if (nomeInput) nomeInput.focus();
         }
-        trackEvent('simulador_validar_click', { colaboradores: colaboradores, setor: setorTxt });
+        trackEvent('simulador_validar_click', { vidas: vidas, setor: setorTxt });
       });
     }
 
@@ -2065,7 +2053,9 @@
         estado.classList.add('ativo');
         return false;
       }
-      if (!/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(dados.email) || dados.email.split('@')[0].includes('..') || /^[.]|[.]$/.test(dados.email.split('@')[0])) {
+      if (!/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(dados.email)
+          || dados.email.split('@')[0].includes('..')
+          || /^[.]|[.]$/.test(dados.email.split('@')[0])) {
         estado.textContent = 'Informe um endereço de e-mail válido.';
         estado.classList.add('ativo');
         return false;
@@ -2073,19 +2063,11 @@
       return true;
     }
 
-    var envioEmCurso = false;
     if (form) {
       form.addEventListener('submit', function(ev){
         ev.preventDefault();
-        if (envioEmCurso) return;
         var dados = coletarDados();
-        if (!validar(dados)) {
-          var erroCampo = ['nome', 'empresa', 'email'].find(function(id){ return !dados[id]; }) || 'email';
-          document.getElementById(erroCampo).focus();
-          return;
-        }
-        document.getElementById('email').value = dados.email;
-        if (!form.reportValidity()) return;
+        if (!validar(dados)) return;
 
         trackEvent('form_submit', {
           empresa: dados.empresa,
@@ -2098,26 +2080,25 @@
         if (assunto) assunto.value = 'Nova validação de cenário — ' + dados.empresa;
 
         if (!EMAILJS_CONFIGURADO || !window.emailjs) {
-          estado.textContent = 'O envio está indisponível no momento. Use o botão de WhatsApp para falar conosco.';
+          estado.textContent = 'O formulário ainda aguarda a configuração final do EmailJS. Use o botão de WhatsApp para falar conosco.';
           estado.classList.add('ativo');
           return;
         }
 
-        envioEmCurso = true;
         if (btnSubmit) {
           btnSubmit.disabled = true;
           btnSubmit.setAttribute('aria-busy', 'true');
           btnSubmit.textContent = 'Enviando...';
         }
 
-        estado.textContent = 'Enviando sua solicitação...';
+        estado.textContent = 'Enviando seus dados com segurança...';
         estado.classList.add('ativo');
 
-        Promise.resolve().then(function(){ return emailjs.sendForm(
+        emailjs.sendForm(
           CONFIG.EMAILJS_SERVICE_ID,
           CONFIG.EMAILJS_TEMPLATE_ID,
           form
-        ); }).then(function(response){
+        ).then(function(response){
           trackEvent('form_success', {
             empresa: dados.empresa,
             status: response && response.status ? response.status : 200
@@ -2135,7 +2116,6 @@
           console.error('Falha no EmailJS:', error);
           estado.textContent = 'Não foi possível enviar agora. Você pode falar diretamente conosco pelo WhatsApp.';
         }).finally(function(){
-          envioEmCurso = false;
           if (btnSubmit) {
             btnSubmit.disabled = false;
             btnSubmit.removeAttribute('aria-busy');
