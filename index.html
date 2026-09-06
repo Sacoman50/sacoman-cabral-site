@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sacoman &amp; Cabral — Advisory de Inteligência Decisória &amp; Governança de Eficiência</title>
+<meta name="description" content="Onde o dado vira decisão de diretoria. Transformamos dados de saúde, pessoas e operação em decisões com impacto financeiro mensurável.">
+<meta property="og:title" content="Sacoman &amp; Cabral — Inteligência Decisória &amp; Governança de Eficiência">
+<meta property="og:description" content="Onde o dado vira decisão de diretoria. Sem novo software. Trabalhamos sobre os dados que sua empresa já produz.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230E141A'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-style='italic' font-size='44' fill='%23C24034' text-anchor='middle'%3E%26amp;%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --tinta: #0E141A;
+    --tinta2: #151D25;
+    --tinta3: #1F2A35;
+    --osso: #F4F3EF;
+    --osso-claro: #FAFAF8;
+    --branco: #FFFFFF;
+    --aco: #8C969F;
+    --aco-claro: #BAC2C8;
+    --grafite: #555E67;
+    --borda-escura: rgba(255, 255, 255, 0.08);
+    --borda-clara: rgba(14, 20, 26, 0.08);
+    --carmim: #A5322B;
+    --carmim-luz: #C24034;
+    --carmim-fundo: rgba(194, 64, 52, 0.08);
+    --carmim-glow: rgba(194, 64, 52, 0.22);
+    --verde-status: #2E7D5A;
+    --serif: "Spectral", Georgia, serif;
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --gut: clamp(16px, 4vw, 56px);
+    --sec: clamp(48px, 6.5vw, 92px);
+    --raio: 6px;
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-elevated: 0 12px 36px rgba(0, 0, 0, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--osso);
+    color: var(--tinta);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--gut); }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--carmim-luz); outline-offset: 3px; }
+  p { margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 500; }
+
+  /* Tipografia utilitária */
+  .rot {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--grafite);
+    font-weight: 600;
+    display: inline-block;
+  }
+  .rot-carmim { color: var(--carmim-luz); }
+  .escuro .rot, .escuro-2 .rot { color: var(--aco-claro); }
+  .amp {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--carmim-luz);
+    padding: 0 .04em;
+  }
+
+  /* Barra de leitura superior */
+  .leitura-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    z-index: 100;
+  }
+  .leitura-barra {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--carmim), var(--carmim-luz));
+    transition: width 0.1s ease-out;
+  }
+
+  /* ---------- Header / Navegação Enxuta ---------- */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 80;
+    transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.solto { background: transparent; }
+  .nav.fixo {
+    background: rgba(14, 20, 26, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--borda-escura);
+  }
+  .nav-int {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 64px;
+  }
+  .marca {
+    font-family: var(--serif);
+    font-size: clamp(15.5px, 2vw, 17px);
+    font-weight: 500;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--osso);
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    white-space: nowrap;
+  }
+  .links { display: flex; align-items: center; gap: 22px; }
+  .links a {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(244, 243, 239, 0.78);
+    text-decoration: none;
+    transition: color .2s ease;
+    padding: 6px 0;
+  }
+  .links a:hover { color: var(--osso); }
+  .links .cta-nav {
+    color: var(--osso);
+    border: 1px solid rgba(244, 243, 239, 0.3);
+    padding: 8px 16px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-radius: var(--raio);
+    background: rgba(255, 255, 255, 0.03);
+    transition: all .24s ease;
+  }
+  .links .cta-nav:hover {
+    background: var(--carmim);
+    border-color: var(--carmim);
+    color: #fff;
+    box-shadow: 0 0 16px var(--carmim-glow);
+  }
+
+  /* Botão Hamburguer Mobile */
+  .menu-toggle {
+    display: none;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--osso);
+    padding: 8px 12px;
+    min-height: 40px;
+    border-radius: var(--raio);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    cursor: pointer;
+    align-items: center;
+    gap: 7px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--osso);
+    position: relative;
+  }
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background: var(--osso);
+    left: 0;
+  }
+  .menu-toggle span::before { top: -5px; }
+  .menu-toggle span::after { top: 5px; }
+
+  /* Drawer Mobile */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .drawer-overlay.aberto { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(84vw, 320px);
+    background: var(--tinta2);
+    border-left: 1px solid var(--borda-escura);
+    z-index: 95;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .drawer-overlay.aberto .drawer { transform: translateX(0); }
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borda-escura);
+  }
+  .drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--aco);
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 6px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 16px 0;
+  }
+  .drawer-links a {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--osso);
+    text-decoration: none;
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: block;
+  }
+  .drawer-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--borda-escura);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .links a:not(.cta-nav) { display: none; }
+    .menu-toggle { display: flex; }
+  }
+
+  /* ---------- Hero Section (Leitura 5–8s) ---------- */
+  .hero {
+    background: var(--tinta);
+    color: var(--osso);
+    position: relative;
+    overflow: hidden;
+    padding-top: clamp(100px, 14vw, 154px);
+    padding-bottom: clamp(48px, 8vw, 84px);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -10%;
+    top: -20%;
+    width: 65vw;
+    height: 110%;
+    background: radial-gradient(closest-side, rgba(165, 50, 43, 0.18), rgba(165, 50, 43, 0) 70%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; z-index: 2; max-width: 960px; }
+  
+  .tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #DFE3E6;
+  }
+  .tag-badge::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background: var(--carmim-luz);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--carmim-luz);
+  }
+  
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 5.5vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -.028em;
+    margin: clamp(16px, 2.5vw, 24px) 0 0;
+    max-width: 18ch;
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; color: #E8E5DF; }
+  
+  .hero .sub-principal {
+    font-size: clamp(16px, 1.6vw, 19px);
+    line-height: 1.5;
+    color: #C2C9CF;
+    max-width: 52ch;
+    margin-top: clamp(14px, 2vw, 20px);
+    font-weight: 300;
+  }
+  .hero .sub-apoio {
+    font-family: var(--mono);
+    font-size: clamp(11.5px, 1.1vw, 13px);
+    color: var(--aco-claro);
+    margin-top: 10px;
+    letter-spacing: .01em;
+  }
+
+  .hero-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: clamp(22px, 3vw, 32px);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 13px 20px;
+    min-height: 46px;
+    border: 1px solid transparent;
+    border-radius: var(--raio);
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn-carmim {
+    background: var(--carmim);
+    border-color: var(--carmim);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(165, 50, 43, 0.35);
+  }
+  .btn-carmim:hover {
+    background: var(--carmim-luz);
+    border-color: var(--carmim-luz);
+    box-shadow: 0 6px 20px rgba(194, 64, 52, 0.45);
+  }
+  .btn-claro {
+    border-color: rgba(244, 243, 239, 0.28);
+    color: var(--osso);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .btn-claro:hover {
+    border-color: var(--osso);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 580px) {
+    .hero-acoes { flex-direction: column; width: 100%; }
+    .hero-acoes .btn { width: 100%; text-align: center; }
+  }
+
+  /* ---------- Seções Globais (Design Limpo & Arejado) ---------- */
+  .sec { padding: var(--sec) 0; position: relative; }
+  .escuro { background: var(--tinta); color: var(--osso); }
+  .escuro-2 { background: var(--tinta2); color: var(--osso); }
+  .fundo-branco { background: var(--branco); }
+  .cab { max-width: 760px; margin-bottom: clamp(24px, 3.5vw, 40px); }
+  .cab h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -.022em;
+    margin: 8px 0 0;
+  }
+  .cab .apoio {
+    font-size: clamp(14.5px, 1.4vw, 16.5px);
+    color: var(--grafite);
+    margin-top: 10px;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .escuro .cab .apoio,
+  .escuro-2 .cab .apoio { color: #A9B3BA; }
+
+  /* Links Gatilho para Camada 2 (Detalhes) */
+  .link-camada2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--carmim-luz);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 6px 0;
+    transition: gap .2s ease;
+  }
+  .link-camada2:hover { gap: 8px; color: var(--carmim); }
+
+  /* ---------- Seção 2: O Problema ---------- */
+  .problema-grid-4 {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 680px) { .problema-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .problema-card {
+    background: var(--osso);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: 14px;
+  }
+  .problema-card b {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--carmim);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .problema-card span { font-size: 12.5px; color: var(--grafite); }
+
+  .problema-desfecho {
+    margin-top: 16px;
+    background: var(--tinta);
+    color: var(--osso);
+    border-radius: var(--raio);
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-left: 3px solid var(--carmim-luz);
+  }
+  .problema-desfecho p { font-size: 14px; color: #CED5DC; margin: 0; max-width: 62ch; }
+
+  /* ---------- Seção 3: O Que Fazemos (3 Cards) ---------- */
+  .servicos-trio {
+    display: grid;
+    gap: clamp(14px, 2vw, 20px);
+  }
+  @media (min-width: 768px) { .servicos-trio { grid-template-columns: repeat(3, 1fr); } }
+  .servico-mini-card {
+    background: var(--branco);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: clamp(20px, 2.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    box-shadow: var(--shadow-subtle);
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .servico-mini-card:hover { transform: translateY(-3px); border-color: rgba(165, 50, 43, 0.3); }
+  .servico-mini-card h3 {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0 0 6px;
+    color: var(--tinta);
+  }
+  .servico-mini-card p {
+    font-size: 13.5px;
+    color: var(--grafite);
+    margin: 0 0 16px;
+  }
+
+  /* ---------- Seção 4: Simulador ---------- */
+  .simulador-card {
+    background: var(--tinta2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: clamp(18px, 3vw, 32px);
+    color: var(--osso);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35);
+  }
+  .sim-layout {
+    display: grid;
+    gap: clamp(18px, 2.5vw, 32px);
+  }
+  @media (min-width: 860px) { .sim-layout { grid-template-columns: 1.05fr 1fr; align-items: center; } }
+  .sim-inputs { display: flex; flex-direction: column; gap: 14px; }
+  .sim-grupo label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--aco-claro);
+    margin-bottom: 5px;
+  }
+  .sim-grupo label span.val-badge {
+    color: var(--carmim-luz);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .sim-setores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .btn-setor {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--osso);
+    border-radius: var(--raio);
+    padding: 9px 4px;
+    min-height: 40px;
+    font-size: 11.5px;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s ease;
+  }
+  .btn-setor:hover { background: rgba(255, 255, 255, 0.08); }
+  .btn-setor.ativo {
+    background: var(--carmim-fundo);
+    border-color: var(--carmim-luz);
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+  .sim-range {
+    width: 100%;
+    height: 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    margin: 4px 0;
+  }
+  .sim-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--carmim-luz);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--carmim-glow);
+    border: 2px solid #FFFFFF;
+  }
+  .sim-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--carmim-luz);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--carmim-glow);
+    border: 2px solid #FFFFFF;
+  }
+
+  .sim-resultados {
+    background: rgba(14, 20, 26, 0.9);
+    border: 1px solid var(--borda-escura);
+    border-radius: 8px;
+    padding: clamp(16px, 2.2vw, 22px);
+  }
+  .sim-metricas-grid { display: grid; gap: 6px; }
+  .sim-metrica-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    font-size: 12px;
+    color: #BDC6CD;
+  }
+  .sim-metrica-row span.valor {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--osso);
+  }
+  .sim-metrica-row.total-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 4px;
+    color: var(--osso);
+  }
+  .sim-metrica-row.total-row span.valor {
+    color: var(--carmim-luz);
+    font-size: 14px;
+  }
+
+  .sim-total-bloco {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 2px solid var(--carmim-luz);
+  }
+  .sim-total-rot {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--carmim-luz);
+    font-weight: 600;
+  }
+  .sim-total-val {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2.4vw, 27px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: #FFFFFF;
+    margin: 2px 0;
+  }
+  .sim-disclaimer {
+    font-size: 10px;
+    color: var(--aco);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Seção 5: Como Funciona (4 Etapas) ---------- */
+  .metodo-grid-4 {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 768px) { .metodo-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .metodo-step-card {
+    background: var(--tinta2);
+    border: 1px solid var(--borda-escura);
+    border-radius: var(--raio);
+    padding: 16px 14px;
+  }
+  .metodo-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--carmim-luz);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .metodo-step-card h3 {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--osso);
+    margin: 0 0 4px;
+  }
+  .metodo-step-card p {
+    font-size: 12px;
+    color: #9EABB4;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ---------- Seção 6: Para Quem (4 Cards) ---------- */
+  .icp-mini-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 768px) { .icp-mini-grid { grid-template-columns: repeat(4, 1fr); } }
+  .icp-mini-card {
+    background: var(--branco);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: 16px 14px;
+    box-shadow: var(--shadow-subtle);
+  }
+  .icp-mini-card b {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--tinta);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .icp-mini-card span { font-size: 12.5px; color: var(--grafite); line-height: 1.4; display: block; }
+
+  /* ---------- Seção 7: Diferencial (3 Pontos) ---------- */
+  .diferencial-trio {
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 768px) { .diferencial-trio { grid-template-columns: repeat(3, 1fr); } }
+  .diferencial-card {
+    background: var(--branco);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: 18px 16px;
+    box-shadow: var(--shadow-subtle);
+  }
+  .diferencial-card b {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--carmim);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .diferencial-card span { font-size: 13px; color: var(--grafite); line-height: 1.45; display: block; }
+
+  .faixa-rigor {
+    margin-top: 20px;
+    background: var(--osso);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--grafite);
+  }
+  .faixa-rigor b { color: var(--tinta); font-family: var(--mono); font-size: 10.5px; }
+
+  /* ---------- Seção 8: Entregáveis (3 Itens) ---------- */
+  .entregaveis-trio {
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 768px) { .entregaveis-trio { grid-template-columns: repeat(3, 1fr); } }
+  .entregavel-mini-card {
+    background: var(--tinta2);
+    border: 1px solid var(--borda-escura);
+    border-radius: var(--raio);
+    padding: 18px 16px;
+  }
+  .entregavel-mini-card h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--osso);
+    margin: 0 0 4px;
+  }
+  .entregavel-mini-card p { font-size: 12.5px; color: #A6B0B8; margin: 0; line-height: 1.45; }
+
+  /* ---------- Seção 9: Quem Somos (Sócios) ---------- */
+  .socios-duo {
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 680px) { .socios-duo { grid-template-columns: 1fr 1fr; } }
+  .socio-card {
+    background: var(--tinta2);
+    border: 1px solid var(--borda-escura);
+    border-radius: var(--raio);
+    padding: 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .ph-avatar-mini {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(165, 50, 43, 0.4), rgba(31, 42, 53, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--osso);
+    flex-shrink: 0;
+  }
+  .socio-info h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    color: var(--osso);
+  }
+  .socio-info p {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--aco);
+    margin: 2px 0 0;
+  }
+
+  /* ---------- Seção 10: Segurança & LGPD ---------- */
+  .seguranca-faixa {
+    background: var(--branco);
+    border: 1px solid var(--borda-clara);
+    border-radius: var(--raio);
+    padding: 20px;
+    box-shadow: var(--shadow-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .seguranca-texto h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 2px;
+    color: var(--tinta);
+  }
+  .seguranca-texto p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--grafite);
+    letter-spacing: .06em;
+    margin: 0;
+  }
+
+  /* ---------- Seção 11: FAQ Accordion ---------- */
+  .faq-item { border-bottom: 1px solid var(--borda-clara); }
+  .faq-pergunta {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 13px 0;
+    min-height: 44px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tinta);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .faq-pergunta::after {
+    content: "+";
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--carmim);
+    transition: transform .24s ease;
+    flex-shrink: 0;
+  }
+  .faq-item.ativo .faq-pergunta::after {
+    content: "−";
+    transform: rotate(180deg);
+  }
+  .faq-resposta {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease-out;
+    color: var(--grafite);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .faq-resposta-int { padding-bottom: 12px; }
+  .faq-extra { display: none; }
+  .faq-extra.visivel { display: block; }
+
+  /* ---------- Seção 12: CTA Final & Formulário ---------- */
+  .cta-final-box {
+    background: var(--tinta2);
+    border: 1px solid var(--borda-escura);
+    border-radius: 10px;
+    padding: clamp(22px, 4vw, 40px);
+    color: var(--osso);
+  }
+  .cta-final-header {
+    max-width: 680px;
+    margin-bottom: 24px;
+  }
+  .cta-final-header h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin: 0 0 8px;
+    color: var(--osso);
+  }
+  .cta-final-header p {
+    font-size: 15px;
+    color: var(--carmim-luz);
+    font-family: var(--mono);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .form-simples { display: flex; flex-direction: column; gap: 10px; }
+  .dupla { display: grid; gap: 10px; }
+  @media (min-width: 520px) { .dupla { grid-template-columns: 1fr 1fr; } }
+  
+  input, select, textarea {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--osso);
+    background: rgba(255, 255, 255, 0.03);
+    border: 0;
+    border-bottom: 1px solid rgba(244, 243, 239, 0.2);
+    border-radius: 0;
+    padding: 8px 4px;
+    min-height: 40px;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(244, 243, 239, 0.3); }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-bottom-color: var(--carmim-luz);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  select {
+    appearance: none;
+    color: var(--osso);
+    background-image: linear-gradient(45deg, transparent 50%, var(--aco) 50%), linear-gradient(135deg, var(--aco) 50%, transparent 50%);
+    background-position: calc(100% - 12px) 16px, calc(100% - 7px) 16px;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+  }
+  select option { background: var(--tinta); color: var(--osso); }
+  textarea { resize: vertical; min-height: 50px; }
+
+  .botoes-form {
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  @media (min-width: 500px) { .botoes-form { grid-template-columns: 1.2fr 1fr; } }
+  
+  .btn-whats { background: #1F382B; border-color: #2E5A44; color: #64E7A2; }
+  .btn-whats:hover { background: #284A39; color: #85F5B9; }
+
+  .estado {
+    display: none;
+    margin-top: 12px;
+    padding: 8px 10px;
+    border-left: 3px solid var(--carmim-luz);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 12.5px;
+    color: #D2D8DD;
+  }
+  .estado.ativo { display: block; }
+
+  /* ---------- Modal / Drawer da Camada 2 (Detalhes Aprofundados) ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 110;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .modal-overlay.aberto { opacity: 1; pointer-events: auto; }
+  .modal-gaveta {
+    width: min(92vw, 560px);
+    height: 100%;
+    background: var(--tinta2);
+    border-left: 1px solid var(--borda-escura);
+    color: var(--osso);
+    padding: clamp(20px, 3.5vw, 36px);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-overlay.aberto .modal-gaveta { transform: translateX(0); }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--borda-escura);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+  .modal-header h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; margin: 0; }
+  .modal-close {
+    background: transparent;
+    border: none;
+    color: var(--aco);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-conteudo { font-size: 14px; line-height: 1.6; color: #BDC6CD; }
+  .modal-conteudo h4 { color: var(--osso); font-size: 15px; margin: 16px 0 6px; }
+  .modal-conteudo ul { padding-left: 18px; margin: 6px 0 14px; }
+  .modal-conteudo li { margin-bottom: 4px; }
+
+  /* ---------- Barra Flutuante Mobile (Sticky Bar) ---------- */
+  .mobile-sticky-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(14, 20, 26, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--borda-escura);
+    padding: 10px 16px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    z-index: 75;
+    gap: 8px;
+    transform: translateY(100%);
+    transition: transform .3s ease;
+  }
+  .mobile-sticky-bar.visivel { transform: translateY(0); }
+  .mobile-sticky-bar a {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    min-height: 42px;
+    font-size: 10px;
+  }
+  @media (max-width: 768px) {
+    .mobile-sticky-bar { display: flex; }
+    body { padding-bottom: 60px; }
+  }
+
+  /* ---------- Rodapé Institucional ---------- */
+  .rodape {
+    background: var(--tinta);
+    color: var(--aco);
+    padding: clamp(32px, 4vw, 48px) 0 20px;
+    border-top: 1px solid var(--borda-escura);
+  }
+  .rod-int {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .rodape .marca { font-size: 15px; }
+  .rodape .links-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+  }
+  .rodape .links-footer a { color: var(--aco); text-decoration: none; }
+  .rodape .links-footer a:hover { color: var(--osso); }
+  .rodape .base {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Revelação / Animações Discretas ---------- */
+  .rev {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .5s cubic-bezier(.2, .8, .3, 1), transform .5s cubic-bezier(.2, .8, .3, 1);
+  }
+  .rev.vis { opacity: 1; transform: none; }
+  .rev.d1 { transition-delay: .05s; }
+  .rev.d2 { transition-delay: .1s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rev { opacity: 1; transform: none; transition: none; }
+    .leitura-barra { transition: none; }
+    .btn:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra de Leitura Superior -->
+<div class="leitura-topo" aria-hidden="true">
+  <div class="leitura-barra" id="leitura-barra"></div>
+</div>
+
+<!-- Header / Navegação Enxuta -->
+<header class="nav solto" id="nav">
+  <div class="wrap nav-int">
+    <a class="marca" href="#topo" aria-label="Sacoman &amp; Cabral — Início">
+      Sacoman <span class="amp">&amp;</span> Cabral
+    </a>
+
+    <nav class="links" aria-label="Navegação Principal">
+      <a href="#servicos">O que fazemos</a>
+      <a href="#metodo">Como funciona</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#contato">Contato</a>
+      <a class="cta-nav" href="#simulador">Validar meu cenário</a>
+    </nav>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span>
+      MENU
+    </button>
+  </div>
+</header>
+
+<!-- Drawer Mobile -->
+<div class="drawer-overlay" id="drawer-overlay" aria-hidden="true">
+  <div class="drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Menu de Navegação">
+    <div class="drawer-header">
+      <span class="marca">Sacoman <span class="amp">&amp;</span> Cabral</span>
+      <button class="drawer-close" id="drawer-close" aria-label="Fechar Menu">&times;</button>
+    </div>
+    <div class="drawer-links">
+      <a href="#servicos" class="drawer-link">O que fazemos</a>
+      <a href="#metodo" class="drawer-link">Como funciona</a>
+      <a href="#para-quem" class="drawer-link">Para quem</a>
+      <a href="#diferencial" class="drawer-link">Por que a S&amp;C</a>
+      <a href="#quem-somos" class="drawer-link">Quem somos</a>
+      <a href="#faq" class="drawer-link">Dúvidas Frequentes</a>
+      <a href="#contato" class="drawer-link">Contato</a>
+    </div>
+    <div class="drawer-footer">
+      <a class="btn btn-carmim" href="#simulador" style="width: 100%; text-align: center;" id="drawer-cta">
+        Validar meu cenário
+      </a>
+    </div>
+  </div>
+</div>
+
+<main id="topo">
+
+<!-- 1. Hero Section -->
+<section class="hero">
+  <div class="wrap">
+    <div class="tag-badge">Fractional Decision Intelligence</div>
+    <h1>Onde o dado <em>vira</em> decisão de diretoria.</h1>
+    <p class="sub-principal">Transformamos dados de saúde, pessoas e operação em decisões com impacto financeiro mensurável.</p>
+    <p class="sub-apoio">Sem novo software. Trabalhamos sobre os dados que sua empresa já produz.</p>
+    
+    <div class="hero-acoes">
+      <a class="btn btn-carmim" href="#simulador" data-tracking="cta_hero_validar">Validar meu cenário</a>
+      <a class="btn btn-claro" href="#contato" data-tracking="cta_hero_socio">Falar com um sócio</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. O Problema -->
+<section class="sec fundo-branco" id="problema">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot">Diagnóstico</span>
+      <h2>Sua empresa já possui os dados.</h2>
+      <p class="apoio">O problema é que eles estão espalhados.</p>
+    </div>
+
+    <div class="problema-grid-4 rev d1">
+      <div class="problema-card">
+        <b>RH</b>
+        <span>Afastamentos e atestados</span>
+      </div>
+      <div class="problema-card">
+        <b>SAÚDE</b>
+        <span>Sinistralidade e reajustes</span>
+      </div>
+      <div class="problema-card">
+        <b>OPERAÇÕES</b>
+        <span>Horas extras e gargalos</span>
+      </div>
+      <div class="problema-card">
+        <b>FINANCEIRO</b>
+        <span>Impacto em OPEX e margem</span>
+      </div>
+    </div>
+
+    <div class="problema-desfecho rev d2">
+      <p>Conectamos essas informações para identificar onde existe exposição, por que ela acontece e onde agir primeiro.</p>
+      <span class="rot rot-carmim">Impacto no Resultado</span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. O Que Fazemos -->
+<section class="sec" id="servicos">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot">Capacidades</span>
+      <h2>Da exposição à decisão.</h2>
+    </div>
+
+    <div class="servicos-trio rev d1">
+      <div class="servico-mini-card">
+        <div>
+          <h3>Diagnóstico</h3>
+          <p>Encontramos e quantificamos.</p>
+        </div>
+        <button type="button" class="link-camada2" data-modal="modal-diagnostico">Conhecer →</button>
+      </div>
+
+      <div class="servico-mini-card">
+        <div>
+          <h3>Governança</h3>
+          <p>Transformamos achados em decisões.</p>
+        </div>
+        <button type="button" class="link-camada2" data-modal="modal-governanca">Conhecer →</button>
+      </div>
+
+      <div class="servico-mini-card">
+        <div>
+          <h3>War Room</h3>
+          <p>Atuamos quando o impacto exige resposta rápida.</p>
+        </div>
+        <button type="button" class="link-camada2" data-modal="modal-warroom">Conhecer →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Simulador Interativo -->
+<section class="sec escuro" id="simulador">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot rot-carmim">Estimativa Preliminar</span>
+      <h2>Quanto pode estar escapando da sua operação?</h2>
+      <p class="apoio">Faça uma estimativa preliminar em menos de 1 minuto.</p>
+    </div>
+
+    <div class="simulador-card rev d1">
+      <div class="sim-layout">
+        
+        <div class="sim-inputs">
+          <div class="sim-grupo">
+            <label>Segmento</label>
+            <div class="sim-setores">
+              <button type="button" class="btn-setor ativo" data-setor="industria">Indústria</button>
+              <button type="button" class="btn-setor" data-setor="logistica">Logística</button>
+              <button type="button" class="btn-setor" data-setor="varejo">Varejo/Serviços</button>
+            </div>
+          </div>
+
+          <div class="sim-grupo">
+            <label for="range-colab">
+              <span>Colaboradores</span>
+              <span class="val-badge" id="lbl-colab">2.500 vidas</span>
+            </label>
+            <input type="range" id="range-colab" class="sim-range" min="500" max="10000" step="250" value="2500">
+          </div>
+
+          <div class="sim-grupo">
+            <label for="select-dor">Principal Desafio</label>
+            <select id="select-dor">
+              <option value="reajuste">Reajuste do Plano de Saúde (&gt;20%)</option>
+              <option value="fap">FAP/NTEP &amp; Nexos Previdenciários</option>
+              <option value="absenteismo">Absenteísmo &amp; Horas Extras</option>
+              <option value="todos">Múltiplos Fatores Simultâneos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sim-resultados">
+          <span class="rot" style="color:var(--aco); margin-bottom:8px; display:block;">Estimativa Preliminar de Exposição</span>
+
+          <div class="sim-metricas-grid">
+            <div class="sim-metrica-row">
+              <span>Saúde (Sinistralidade):</span>
+              <span class="valor" id="res-saude">R$ 1.552.500</span>
+            </div>
+            <div class="sim-metrica-row">
+              <span>Previdenciário (FAP):</span>
+              <span class="valor" id="res-fap">R$ 775.000</span>
+            </div>
+            <div class="sim-metrica-row">
+              <span>Horas Extras:</span>
+              <span class="valor" id="res-he">R$ 600.000</span>
+            </div>
+            <div class="sim-metrica-row total-row">
+              <span>Exposição Total:</span>
+              <span class="valor" id="res-total-drenos">R$ 2.927.500</span>
+            </div>
+          </div>
+
+          <div class="sim-total-bloco">
+            <span class="sim-total-rot">Potencial Indicativo de Captura</span>
+            <div class="sim-total-val" id="res-captura">R$ 936.800 a R$ 1.902.875</div>
+          </div>
+
+          <div style="margin-top: 12px;">
+            <button type="button" class="btn btn-carmim" id="btn-aplicar-sim" style="width: 100%;">
+              Validar esta estimativa
+            </button>
+            <p style="font-size: 10.5px; color: var(--aco); text-align: center; margin: 6px 0 0;">
+              Transformamos a estimativa em um diagnóstico baseado nos dados reais da operação.
+            </p>
+          </div>
+
+          <p class="sim-disclaimer">
+            * Estimativa indicativa baseada em parâmetros médios de mercado. A exposição real depende da análise executiva dos dados.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Como Funciona -->
+<section class="sec" id="metodo">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot">Método</span>
+      <h2>Do dado à decisão.</h2>
+    </div>
+
+    <div class="metodo-grid-4 rev d1">
+      <div class="metodo-step-card">
+        <span class="metodo-num">01</span>
+        <h3>ENCONTRAR</h3>
+        <p>Identificamos a exposição.</p>
+      </div>
+      <div class="metodo-step-card">
+        <span class="metodo-num">02</span>
+        <h3>QUANTIFICAR</h3>
+        <p>Medimos o impacto financeiro.</p>
+      </div>
+      <div class="metodo-step-card">
+        <span class="metodo-num">03</span>
+        <h3>PRIORIZAR</h3>
+        <p>Definimos onde agir primeiro.</p>
+      </div>
+      <div class="metodo-step-card">
+        <span class="metodo-num">04</span>
+        <h3>EXECUTAR</h3>
+        <p>Acompanhamos a captura de valor.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 18px;" class="rev d2">
+      <button type="button" class="link-camada2" data-modal="modal-metodo">Conhecer o Protocolo Desfecho →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Para Quem -->
+<section class="sec fundo-branco" id="para-quem">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot">Aderência</span>
+      <h2>Para quem fomos desenhados.</h2>
+    </div>
+
+    <div class="icp-mini-grid rev d1">
+      <div class="icp-mini-card">
+        <b>CFO</b>
+        <span>Margem e exposição financeira.</span>
+      </div>
+      <div class="icp-mini-card">
+        <b>RH</b>
+        <span>Absenteísmo e produtividade.</span>
+      </div>
+      <div class="icp-mini-card">
+        <b>OPERAÇÕES</b>
+        <span>Eficiência e gargalos de turno.</span>
+      </div>
+      <div class="icp-mini-card">
+        <b>SAÚDE</b>
+        <span>Gestão assistencial e ocupacional.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Por que Sacoman & Cabral -->
+<section class="sec" id="diferencial">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot">Posicionamento</span>
+      <h2>Quando BI não é suficiente.</h2>
+    </div>
+
+    <div class="diferencial-trio rev d1">
+      <div class="diferencial-card">
+        <b>DADOS EXISTENTES</b>
+        <span>Sem substituir seu BI. Trabalhamos sobre o que a empresa já produz.</span>
+      </div>
+      <div class="diferencial-card">
+        <b>VISÃO INTEGRADA</b>
+        <span>Saúde + pessoas + operação + financeiro na mesma mesa.</span>
+      </div>
+      <div class="diferencial-card">
+        <b>DECISÃO EXECUTIVA</b>
+        <span>Diagnóstico de causa-raiz traduzido em plano de ação de EBITDA.</span>
+      </div>
+    </div>
+
+    <div class="faixa-rigor rev d2">
+      <div><b>Método &middot; Rigor &middot; Transparência:</b> Premissas rastreáveis, governança formal e sem promessas de resultado garantido.</div>
+      <button type="button" class="link-camada2" data-modal="modal-valor">Como mensuramos →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Entregáveis -->
+<section class="sec escuro" id="entregaveis">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot rot-carmim">Governança</span>
+      <h2>O que chega à mesa da diretoria.</h2>
+    </div>
+
+    <div class="entregaveis-trio rev d1">
+      <div class="entregavel-mini-card">
+        <h3>Diagnóstico Executivo</h3>
+        <p>Onde está a exposição e o que priorizar.</p>
+      </div>
+      <div class="entregavel-mini-card">
+        <h3>Matriz de Drenos</h3>
+        <p>O que atacar primeiro.</p>
+      </div>
+      <div class="entregavel-mini-card">
+        <h3>Plano de Ação (5W2H)</h3>
+        <p>Quem faz, quando e como acompanhar.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 18px;" class="rev d2">
+      <button type="button" class="link-camada2" data-modal="modal-entregaveis" style="color:var(--osso);">Ver todos os entregáveis →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Quem Somos -->
+<section class="sec escuro-2" id="quem-somos">
+  <div class="wrap">
+    <div class="cab rev">
+      <span class="rot rot-carmim">Liderança</span>
+      <h2>Duas especialidades. Um diagnóstico.</h2>
+    </div>
+
+    <div class="socios-duo rev d1">
+      <div class="socio-card">
+        <div class="ph-avatar-mini">MS</div>
+        <div class="socio-info">
+          <h3>Matheus Sacoman</h3>
+          <p>Processos &middot; Analytics &middot; Gestão</p>
+        </div>
+      </div>
+      <div class="socio-card">
+        <div class="ph-avatar-mini">EC</div>
+        <div class="socio-info">
+          <h3>Dr. Ezequiel Cabral</h3>
+          <p>Medicina &middot; Saúde Corporativa &middot; Gestão</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px;" class="rev d2">
+      <button type="button" class="link-camada2" data-modal="modal-socios" style="color:var(--osso);">Conhecer os sócios →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Segurança e LGPD -->
+<section class="sec" id="seguranca">
+  <div class="wrap">
+    <div class="seguranca-faixa rev">
+      <div class="seguranca-texto">
+        <h3>Dados sensíveis exigem rigor.</h3>
+        <p>LGPD &middot; CONFIDENCIALIDADE &middot; MINIMIZAÇÃO &middot; CONTROLE DE ACESSO</p>
+      </div>
+      <button type="button" class="link-camada2" data-modal="modal-seguranca">Nossa abordagem de compliance →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 11. FAQ Accordion -->
+<section class="sec fundo-branco" id="faq">
+  <div class="wrap" style="max-width: 840px;">
+    <div class="cab rev">
+      <span class="rot">Dúvidas Frequentes</span>
+      <h2>Perguntas da Diretoria</h2>
+    </div>
+
+    <div class="faq-lista rev d1">
+      <div class="faq-item">
+        <button class="faq-pergunta" aria-expanded="false">Preciso envolver TI?</button>
+        <div class="faq-resposta">
+          <div class="faq-resposta-int"><strong>Não.</strong> Consumimos os relatórios e extratos que sua empresa já emite. Zero desenvolvimento ou novos softwares.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pergunta" aria-expanded="false">Vocês substituem nosso BI?</button>
+        <div class="faq-resposta">
+          <div class="faq-resposta-int"><strong>Não.</strong> Seu BI monitora o histórico. Nós diagnosticamos as causas-raiz e estruturamos as decisões de EBITDA.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pergunta" aria-expanded="false">Que dados vocês precisam?</button>
+        <div class="faq-resposta">
+          <div class="faq-resposta-int">Relatórios existentes: faturas de saúde, extratos de afastamentos do RH/SESMT, horas extras por setor e extrato FAP.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pergunta" aria-expanded="false">Como os dados são tratados?</button>
+        <div class="faq-resposta">
+          <div class="faq-resposta-int">Sob pseudonimização (LGPD), sigilo médico profissional (CFM), criptografia e expurgo formal em até 90 dias.</div>
+        </div>
+      </div>
+
+      <!-- Perguntas Extras Reveláveis -->
+      <div class="faq-extra" id="faq-extra-bloco">
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">Quanto tempo dura o diagnóstico?</button>
+          <div class="faq-resposta">
+            <div class="faq-resposta-int">O Diagnóstico Executivo tem duração de 30 a 45 dias, com dedicação interna mínima da sua equipe.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">Podemos executar internamente as recomendações?</button>
+          <div class="faq-resposta">
+            <div class="faq-resposta-int">Sim. O plano 5W2H é entregue pronto. A empresa tem total autonomia para executar internamente ou contratar nosso comitê mensal.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 14px; text-align: center;">
+      <button type="button" class="link-camada2" id="btn-ver-mais-faq">Ver mais perguntas ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- 12. CTA Final & Formulário -->
+<section class="sec escuro" id="contato">
+  <div class="wrap">
+    <div class="cta-final-box rev">
+      <div class="cta-final-header">
+        <h2>Existe uma diferença entre saber que existe desperdício e saber quanto ele custa.</h2>
+        <p>Vamos descobrir o número.</p>
+      </div>
+
+      <form id="form-contato" class="form-simples" novalidate>
+        <input type="hidden" name="to_email" value="matheussacoman@arquitetodeprocesssos.com.br">
+        <input type="hidden" name="assunto" id="assunto-emailjs" value="Nova validação de cenário — Sacoman & Cabral">
+        <div class="dupla">
+          <div>
+            <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Nome Completo *" required>
+          </div>
+          <div>
+            <input id="cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Cargo / Função *" required>
+          </div>
+        </div>
+
+        <div class="dupla">
+          <div>
+            <input id="empresa" name="empresa" type="text" autocomplete="organization" placeholder="Empresa *" required>
+          </div>
+          <div>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="E-mail Corporativo *" required>
+          </div>
+        </div>
+
+        <div class="dupla">
+          <div>
+            <select id="porte" name="porte">
+              <option value="">Colaboradores (Aproximado)</option>
+              <option value="Menos de 500 vidas">Menos de 500 vidas</option>
+              <option value="500 a 1.000 vidas">500 a 1.000 vidas</option>
+              <option value="1.000 a 3.000 vidas">1.000 a 3.000 vidas</option>
+              <option value="Mais de 3.000 vidas">Mais de 3.000 vidas</option>
+            </select>
+          </div>
+          <div>
+            <input id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="Telefone / WhatsApp">
+          </div>
+        </div>
+
+        <div>
+          <textarea id="contexto" name="contexto" placeholder="Contexto ou principal desafio (opcional)"></textarea>
+        </div>
+
+        <div class="botoes-form">
+          <button class="btn btn-carmim" type="submit" id="btn-submit-form">
+            Validar meu cenário
+          </button>
+          <button type="button" class="btn btn-whats" id="btn-whats-form">
+            Falar com um sócio via WhatsApp
+          </button>
+        </div>
+
+        <div class="estado" id="estado" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Modal / Drawer da Camada 2 (Detalhes Aprofundados) -->
+<div class="modal-overlay" id="modal-detalhes" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-gaveta">
+    <div class="modal-header">
+      <h3 id="modal-titulo">Detalhes</h3>
+      <button class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-conteudo" id="modal-corpo">
+      <!-- Conteúdo injetado via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Barra Flutuante de Ação Rápida Mobile -->
+<div class="mobile-sticky-bar" id="mobile-sticky-bar">
+  <a class="btn btn-whats" href="#contato" id="sticky-btn-socio">
+    Falar com um sócio
+  </a>
+  <a class="btn btn-carmim" href="#simulador">
+    Validar meu cenário
+  </a>
+</div>
+
+<!-- Rodapé Institucional Enxuto -->
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rod-int">
+      <div>
+        <span class="marca">Sacoman <span class="amp">&amp;</span> Cabral</span>
+      </div>
+      <div class="links-footer">
+        <a href="mailto:contato@sacomancabral.com.br">contato@sacomancabral.com.br</a>
+        <a href="#seguranca">Segurança &amp; LGPD</a>
+        <span>São Paulo, SP</span>
+      </div>
+    </div>
+    <div class="base">
+      <span>&copy; <span id="ano">2026</span> Sacoman &amp; Cabral Advisory.</span>
+      <span>Fractional Decision Intelligence</span>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  (function(){
+    /* =========================================================================
+       CONFIGURAÇÕES GLOBAIS DA EMPRESA
+       ========================================================================= */
+    var CONFIG = {
+      WHATSAPP_NUMERO: '5547992080823',
+      EMAIL_CONTATO: 'matheussacoman@arquitetodeprocesssos.com.br',
+
+      // EMAILJS — substitua pelos valores do seu painel em https://dashboard.emailjs.com/
+      EMAILJS_SERVICE_ID: 'service_9ac9qyf',
+      EMAILJS_TEMPLATE_ID: 'template_yduxuws',
+      EMAILJS_PUBLIC_KEY: 'cpqM6Tls6AIdaIqIR',
+
+      DEBUG_TRACKING: false
+    };
+
+    // Inicializa o EmailJS somente quando as credenciais tiverem sido preenchidas.
+    var EMAILJS_CONFIGURADO =
+      CONFIG.EMAILJS_SERVICE_ID &&
+      CONFIG.EMAILJS_TEMPLATE_ID &&
+      CONFIG.EMAILJS_PUBLIC_KEY &&
+      !CONFIG.EMAILJS_SERVICE_ID.startsWith('SEU_') &&
+      !CONFIG.EMAILJS_TEMPLATE_ID.startsWith('SEU_') &&
+      !CONFIG.EMAILJS_PUBLIC_KEY.startsWith('SUA_');
+
+    if (EMAILJS_CONFIGURADO && window.emailjs) {
+      emailjs.init({
+        publicKey: CONFIG.EMAILJS_PUBLIC_KEY,
+        blockHeadless: true,
+        limitRate: {
+          id: 'sacoman-cabral-form',
+          throttle: 10000
+        }
+      });
+    }
+
+    /* =========================================================================
+       TRACKING LEVE (Analytics-Ready)
+       ========================================================================= */
+    function trackEvent(nome, params){
+      if (CONFIG.DEBUG_TRACKING) console.log('[S&C Event]', nome, params || {});
+      if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+        window.dataLayer.push(Object.assign({ event: nome }, params || {}));
+      }
+    }
+
+    var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* 1. Revelação suave */
+    var alvos = document.querySelectorAll('.rev');
+    if (reduz || !('IntersectionObserver' in window)) {
+      alvos.forEach(function(el){ el.classList.add('vis'); });
+    } else {
+      var obs = new IntersectionObserver(function(ent){
+        ent.forEach(function(e){
+          if (e.isIntersecting) {
+            e.target.classList.add('vis');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      alvos.forEach(function(el){ obs.observe(el); });
+    }
+
+    /* 2. Barra de leitura & nav */
+    var barraLeitura = document.getElementById('leitura-barra');
+    var nav = document.getElementById('nav');
+    var mobileStickyBar = document.getElementById('mobile-sticky-bar');
+
+    function aoRolar(){
+      var y = window.scrollY || window.pageYOffset || 0;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? Math.min(y / max, 1) : 0;
+      if (barraLeitura) barraLeitura.style.width = (pct * 100) + '%';
+
+      if (y > 40) { nav.classList.add('fixo'); nav.classList.remove('solto'); }
+      else { nav.classList.remove('fixo'); nav.classList.add('solto'); }
+
+      if (mobileStickyBar) {
+        if (y > 320 && (max - y) > 280) mobileStickyBar.classList.add('visivel');
+        else mobileStickyBar.classList.remove('visivel');
+      }
+    }
+    window.addEventListener('scroll', aoRolar, { passive: true });
+    aoRolar();
+
+    /* 3. Menu Mobile Drawer */
+    var menuToggle = document.getElementById('menu-toggle');
+    var drawerClose = document.getElementById('drawer-close');
+    var drawerOverlay = document.getElementById('drawer-overlay');
+    var drawerLinks = document.querySelectorAll('.drawer-link, #drawer-cta');
+
+    function abrirDrawer(){
+      drawerOverlay.classList.add('aberto');
+      drawerOverlay.setAttribute('aria-hidden', 'false');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function fecharDrawer(){
+      drawerOverlay.classList.remove('aberto');
+      drawerOverlay.setAttribute('aria-hidden', 'true');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (menuToggle) menuToggle.addEventListener('click', abrirDrawer);
+    if (drawerClose) drawerClose.addEventListener('click', fecharDrawer);
+    if (drawerOverlay) {
+      drawerOverlay.addEventListener('click', function(e){
+        if (e.target === drawerOverlay) fecharDrawer();
+      });
+    }
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        if (drawerOverlay.classList.contains('aberto')) fecharDrawer();
+        if (modalOverlay.classList.contains('aberto')) fecharModal();
+      }
+    });
+    drawerLinks.forEach(function(l){ l.addEventListener('click', fecharDrawer); });
+
+    /* 4. Base de Conteúdos da Camada 2 (Modal / Gaveta) */
+    var CONTEUDOS_MODAL = {
+      'modal-diagnostico': {
+        titulo: 'Diagnóstico Executivo de Eficiência & Margem',
+        html: '<p><strong>Sprint de 30 a 45 dias</strong> para identificação e quantificação cirúrgica dos drenos de margem.</p><h4>3 Entregáveis Oficiais:</h4><ul><li><strong>Auditoria de Dados:</strong> Consolidação de ERP, relatórios de operadora e BI legados.</li><li><strong>Matriz de Drenos:</strong> Sinistralidade médica, impacto de afastamentos no FAP/NTEP e horas extras.</li><li><strong>Relatório de Desfecho:</strong> Parecer técnico-médico e analítico para a diretoria com mapa de captura de valor.</li></ul><p><em>Modelo: Escopo Fechado sob Medida &middot; Zero setup de TI.</em></p>'
+      },
+      'modal-governanca': {
+        titulo: 'Comitê de Decisão Estratégica (Governança)',
+        html: '<p><strong>Retainer Mensal</strong> com presença executiva de 2h junto aos C-Levels e Diretorias.</p><h4>Pilares de Governança:</h4><ul><li><strong>Rito D-10 a D+2:</strong> Envio prévio do Executive Monthly Briefing 48h antes da reunião.</li><li><strong>Executive Briefing (1 página):</strong> Semáforo orçamentário e parecer clínico.</li><li><strong>Governança 5W2H:</strong> Cobrança contínua e acompanhamento da captura de EBITDA.</li></ul>'
+      },
+      'modal-warroom': {
+        titulo: 'War Room & Mitigação de Riscos',
+        html: '<p>Intervenção pontual para reajustes críticos de planos de saúde e blindagem de FAP/NTEP.</p><h4>Atuação Técnica:</h4><ul><li><strong>Decomposição Técnica:</strong> Separação de sinistros catastróficos vs. custos recorrentes.</li><li><strong>Auditoria de Contas:</strong> Análise médica de glosas e pertinência clínica.</li><li><strong>Mesa de Negociação:</strong> Defesa técnica pericial contra a operadora/corretora.</li></ul>'
+      },
+      'modal-metodo': {
+        titulo: 'Protocolo Desfecho: O Método',
+        html: '<p><em>Desfecho</em> é termo clínico: o resultado final mensurável e comprovado.</p><h4>As 4 Etapas:</h4><ul><li><strong>01 &middot; Ingestão Crítica:</strong> Consumimos os dados que sua empresa já possui. Zero projeto de TI.</li><li><strong>02 &middot; Diagnóstico Causa-Raiz:</strong> Cruzamento analítico e clínico isolando desperdícios.</li><li><strong>03 &middot; Tradutor Executivo:</strong> Conversão dos achados técnicos em decisões de negócio (5W2H).</li><li><strong>04 &middot; Governança Ativa:</strong> Acompanhamento mensal da execução e mensuração contínua de margem.</li></ul>'
+      },
+      'modal-entregaveis': {
+        titulo: 'O que chega à mesa da diretoria',
+        html: '<h4>Entregáveis Executivos:</h4><ul><li><strong>Relatório de Desfecho (1 pág):</strong> Parecer técnico-médico e mapa de alavancas de EBITDA.</li><li><strong>Matriz de Drenos Financeiros:</strong> Priorização por impacto e facilidade de captura.</li><li><strong>Plano de Ação 5W2H:</strong> Quem faz, o quê, quando e como acompanhar.</li><li><strong>Dossiê War Room:</strong> Decomposição técnica de reajustes para negociação.</li><li><strong>SLA de Governança:</strong> Padrões de resposta em até 48h úteis.</li></ul>'
+      },
+      'modal-socios': {
+        titulo: 'Sócios Fundadores',
+        html: '<h4>Matheus Sacoman</h4><p><em>Inteligência Analítica &amp; Processos</em><br>Auditoria quantitativa de dados operacionais, correlação de causa-raiz, modelagem de cenários de ROI em EBITDA e metodologia 5W2H.</p><h4>Dr. Ezequiel Cabral</h4><p><em>Medicina Executiva &amp; Governança</em><br>Médico executivo com trajetória em multinacionais líderes globais. Responde pela validação clínica, auditoria de contas hospitalares e blindagem de FAP/NTEP.</p><p><strong>Competências Integradas:</strong> Lean Six Sigma &middot; Auditoria de Processos &middot; Medicina Corporativa &middot; Modelagem Financeira &middot; LGPD/CFM.</p>'
+      },
+      'modal-seguranca': {
+        titulo: 'Segurança e Confidencialidade',
+        html: '<p>Protocolo rigoroso de privacidade apresentado formalmente antes de qualquer análise:</p><ul><li><strong>Pseudonimização (LGPD Art. 5º):</strong> Relatórios recebidos sem dados de identificação direta (nomes/CPFs).</li><li><strong>Sigilo Médico Restrito (CFM):</strong> Acesso a casos clínicos exclusivo ao médico executivo sob Código de Ética Médica.</li><li><strong>Minimização &amp; Expurgo em 90 dias:</strong> Eliminação formal dos arquivos de trabalho com emissão de termo.</li><li><strong>Criptografia em Repouso e Trânsito:</strong> Controle rígido de acessos.</li></ul>'
+      },
+      'modal-valor': {
+        titulo: 'Como Mensuramos Valor',
+        html: '<p>A esteira de 5 passos que conecta dados ao retorno financeiro:</p><ul><li><strong>1. Exposição:</strong> Quanto a ineficiência representa em reais para a organização.</li><li><strong>2. Causa:</strong> Mecanismos operacionais, assistenciais ou contratuais geradores.</li><li><strong>3. Alavanca:</strong> Decisão executiva viável para alterar o indicador.</li><li><strong>4. Impacto:</strong> Valor em EBITDA a recuperar, evitar (cost avoidance) ou proteger.</li><li><strong>5. Execução:</strong> Acompanhamento formal da captura via plano 5W2H.</li></ul>'
+      }
+    };
+
+    var modalOverlay = document.getElementById('modal-detalhes');
+    var modalTitulo = document.getElementById('modal-titulo');
+    var modalCorpo = document.getElementById('modal-corpo');
+    var modalClose = document.getElementById('modal-close');
+
+    function abrirModal(chave){
+      var item = CONTEUDOS_MODAL[chave];
+      if (!item) return;
+      modalTitulo.textContent = item.titulo;
+      modalCorpo.innerHTML = item.html;
+      modalOverlay.classList.add('aberto');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      trackEvent('modal_aberto', { chave: chave });
+    }
+
+    function fecharModal(){
+      modalOverlay.classList.remove('aberto');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-modal]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        abrirModal(this.getAttribute('data-modal'));
+      });
+    });
+
+    if (modalClose) modalClose.addEventListener('click', fecharModal);
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', function(e){
+        if (e.target === modalOverlay) fecharModal();
+      });
+    }
+
+    /* 5. Simulador Interativo */
+    var rangeColab = document.getElementById('range-colab');
+    var lblColab = document.getElementById('lbl-colab');
+    var btnSetores = document.querySelectorAll('.btn-setor');
+    var selectDor = document.getElementById('select-dor');
+    var resSaude = document.getElementById('res-saude');
+    var resFap = document.getElementById('res-fap');
+    var resHe = document.getElementById('res-he');
+    var resTotalDrenos = document.getElementById('res-total-drenos');
+    var resCaptura = document.getElementById('res-captura');
+    var btnAplicarSim = document.getElementById('btn-aplicar-sim');
+
+    var setorAtivo = 'industria';
+
+    function formatarMoeda(val){
+      return 'R$ ' + Math.round(val).toLocaleString('pt-BR');
+    }
+
+    function atualizarSimulador(){
+      var vidas = parseInt(rangeColab.value, 10);
+      lblColab.textContent = vidas.toLocaleString('pt-BR') + (vidas >= 10000 ? '+ vidas' : ' vidas');
+
+      var multSaude = 460, multFap = 310, multHe = 240;
+      if (setorAtivo === 'logistica') { multSaude = 490; multFap = 280; multHe = 290; }
+      else if (setorAtivo === 'varejo') { multSaude = 410; multFap = 190; multHe = 210; }
+
+      var dor = selectDor.value;
+      if (dor === 'reajuste') multSaude *= 1.35;
+      else if (dor === 'fap') multFap *= 1.45;
+      else if (dor === 'absenteismo') multHe *= 1.40;
+      else if (dor === 'todos') { multSaude *= 1.20; multFap *= 1.20; multHe *= 1.20; }
+
+      var vSaude = vidas * multSaude;
+      var vFap = vidas * multFap;
+      var vHe = vidas * multHe;
+      var total = vSaude + vFap + vHe;
+
+      resSaude.textContent = formatarMoeda(vSaude);
+      resFap.textContent = formatarMoeda(vFap);
+      resHe.textContent = formatarMoeda(vHe);
+      resTotalDrenos.textContent = formatarMoeda(total);
+      resCaptura.textContent = formatarMoeda(total * 0.32) + ' a ' + formatarMoeda(total * 0.65);
+    }
+
+    btnSetores.forEach(function(b){
+      b.addEventListener('click', function(){
+        btnSetores.forEach(function(s){ s.classList.remove('ativo'); });
+        this.classList.add('ativo');
+        setorAtivo = this.getAttribute('data-setor');
+        atualizarSimulador();
+      });
+    });
+
+    if (rangeColab) rangeColab.addEventListener('input', atualizarSimulador);
+    if (selectDor) selectDor.addEventListener('change', atualizarSimulador);
+    atualizarSimulador();
+
+    if (btnAplicarSim) {
+      btnAplicarSim.addEventListener('click', function(){
+        var vidas = rangeColab.value;
+        var dorTxt = selectDor.options[selectDor.selectedIndex].text;
+        var setorTxt = document.querySelector('.btn-setor.ativo').textContent;
+
+        var porteSelect = document.getElementById('porte');
+        if (porteSelect) {
+          if (vidas < 500) porteSelect.value = 'Menos de 500 vidas';
+          else if (vidas <= 1000) porteSelect.value = '500 a 1.000 vidas';
+          else if (vidas <= 3000) porteSelect.value = '1.000 a 3.000 vidas';
+          else porteSelect.value = 'Mais de 3.000 vidas';
+        }
+
+        var contextoInput = document.getElementById('contexto');
+        if (contextoInput) {
+          contextoInput.value = 'Estimativa no site: ' + setorTxt + ' com ~' + vidas + ' vidas. Desafio: ' + dorTxt + '.';
+        }
+
+        var contatoSec = document.getElementById('contato');
+        if (contatoSec) {
+          contatoSec.scrollIntoView({ behavior: 'smooth' });
+          var nomeInput = document.getElementById('nome');
+          if (nomeInput) nomeInput.focus();
+        }
+        trackEvent('simulador_validar_click', { vidas: vidas, setor: setorTxt });
+      });
+    }
+
+    /* 6. FAQ Accordion */
+    var faqPerguntas = document.querySelectorAll('.faq-pergunta');
+    faqPerguntas.forEach(function(perg){
+      perg.addEventListener('click', function(){
+        var item = this.parentElement;
+        var resposta = this.nextElementSibling;
+        var aberto = item.classList.contains('ativo');
+
+        document.querySelectorAll('.faq-item').forEach(function(outro){
+          if (outro !== item) {
+            outro.classList.remove('ativo');
+            outro.querySelector('.faq-pergunta').setAttribute('aria-expanded', 'false');
+            outro.querySelector('.faq-resposta').style.maxHeight = null;
+          }
+        });
+
+        if (aberto) {
+          item.classList.remove('ativo');
+          this.setAttribute('aria-expanded', 'false');
+          resposta.style.maxHeight = null;
+        } else {
+          item.classList.add('ativo');
+          this.setAttribute('aria-expanded', 'true');
+          resposta.style.maxHeight = resposta.scrollHeight + 'px';
+        }
+      });
+    });
+
+    var btnVerMaisFaq = document.getElementById('btn-ver-mais-faq');
+    var faqExtraBloco = document.getElementById('faq-extra-bloco');
+    if (btnVerMaisFaq && faqExtraBloco) {
+      btnVerMaisFaq.addEventListener('click', function(){
+        faqExtraBloco.classList.toggle('visivel');
+        if (faqExtraBloco.classList.contains('visivel')) {
+          this.textContent = 'Ver menos perguntas ↑';
+        } else {
+          this.textContent = 'Ver mais perguntas ↓';
+        }
+      });
+    }
+
+    /* 7. Formulário de Contato & WhatsApp */
+    var form = document.getElementById('form-contato');
+    var estado = document.getElementById('estado');
+    var btnWhatsForm = document.getElementById('btn-whats-form');
+
+    function coletarDados(){
+      var d = new FormData(form);
+      return {
+        nome: (d.get('nome') || '').trim(),
+        cargo: (d.get('cargo') || '').trim(),
+        empresa: (d.get('empresa') || '').trim(),
+        porte: (d.get('porte') || '').trim(),
+        email: (d.get('email') || '').trim(),
+        telefone: (d.get('telefone') || '').trim(),
+        contexto: (d.get('contexto') || '').trim()
+      };
+    }
+
+    function validar(dados){
+      if (!dados.nome || !dados.cargo || !dados.empresa || !dados.email) {
+        estado.textContent = 'Por favor, preencha os campos obrigatórios (*).';
+        estado.classList.add('ativo');
+        return false;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) {
+        estado.textContent = 'Informe um e-mail corporativo válido.';
+        estado.classList.add('ativo');
+        return false;
+      }
+      return true;
+    }
+
+    if (form) {
+      form.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        var dados = coletarDados();
+        if (!validar(dados)) return;
+
+        trackEvent('form_submit', {
+          empresa: dados.empresa,
+          porte: dados.porte || '',
+          origem: 'site'
+        });
+
+        var btnSubmit = document.getElementById('btn-submit-form');
+        var assunto = document.getElementById('assunto-emailjs');
+        if (assunto) assunto.value = 'Nova validação de cenário — ' + dados.empresa;
+
+        if (!EMAILJS_CONFIGURADO || !window.emailjs) {
+          estado.textContent = 'O formulário ainda aguarda a configuração final do EmailJS. Use o botão de WhatsApp para falar conosco.';
+          estado.classList.add('ativo');
+          return;
+        }
+
+        if (btnSubmit) {
+          btnSubmit.disabled = true;
+          btnSubmit.setAttribute('aria-busy', 'true');
+          btnSubmit.textContent = 'Enviando...';
+        }
+
+        estado.textContent = 'Enviando seus dados com segurança...';
+        estado.classList.add('ativo');
+
+        emailjs.sendForm(
+          CONFIG.EMAILJS_SERVICE_ID,
+          CONFIG.EMAILJS_TEMPLATE_ID,
+          form
+        ).then(function(response){
+          trackEvent('form_success', {
+            empresa: dados.empresa,
+            status: response && response.status ? response.status : 200
+          });
+
+          estado.textContent = 'Recebemos seus dados. Entraremos em contato em breve.';
+          form.reset();
+          if (assunto) assunto.value = 'Nova validação de cenário — Sacoman & Cabral';
+        }).catch(function(error){
+          trackEvent('form_error', {
+            empresa: dados.empresa,
+            erro: error && error.text ? error.text : 'emailjs_error'
+          });
+
+          console.error('Falha no EmailJS:', error);
+          estado.textContent = 'Não foi possível enviar agora. Você pode falar diretamente conosco pelo WhatsApp.';
+        }).finally(function(){
+          if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.removeAttribute('aria-busy');
+            btnSubmit.textContent = 'Validar meu cenário';
+          }
+        });
+      });
+    }
+
+    if (btnWhatsForm) {
+      btnWhatsForm.addEventListener('click', function(){
+        var dados = coletarDados();
+        trackEvent('whatsapp_click', dados);
+
+        var msg = [
+          '*Validação Executiva — Sacoman & Cabral*',
+          'Nome: ' + (dados.nome || 'Não informado'),
+          'Cargo: ' + (dados.cargo || 'Não informado'),
+          'Empresa: ' + (dados.empresa || 'Não informado'),
+          'Colaboradores: ' + (dados.porte || 'Não informado'),
+          'E-mail: ' + (dados.email || 'Não informado'),
+          'Contexto: ' + (dados.contexto || 'Interesse na validação de cenário')
+        ].join('\n');
+
+        if (CONFIG.WHATSAPP_NUMERO) {
+          var url = 'https://wa.me/' + CONFIG.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
+          window.open(url, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = 'mailto:' + CONFIG.EMAIL_CONTATO
+            + '?subject=' + encodeURIComponent('Contato via WhatsApp — ' + (dados.empresa || 'Empresa'))
+            + '&body=' + encodeURIComponent(msg);
+        }
+      });
+    }
+
+    /* 8. Atualização do Ano */
+    var anoEl = document.getElementById('ano');
+    if (anoEl) anoEl.textContent = new Date().getFullYear();
+
+  })();
+</script>
+
+</body>
+</html>
